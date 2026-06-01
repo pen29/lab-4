@@ -2,7 +2,8 @@
 <html lang="zh-Hant">
 <title>喵咪服務處</title>
 <link rel="icon" type="image/png" href="./photo/800x.png">
-
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,9 +65,7 @@
         .navbar nav a:hover {
             color: #ff6b81;
         }
-
         /* ===== Hero區 ===== */
-
         .hero {
             width: 100%;
             min-height: 90vh;
@@ -336,10 +335,6 @@
         .footer-box hr {
             margin-bottom: 25px;
         }
-
-
-
-
         .container {
 
             display: flex;
@@ -547,6 +542,91 @@
 
             color: #ff6b81;
         }
+
+        .slider {
+            position: relative;
+            width: 560px;
+        }
+
+        /* 圖片區 */
+        .slides {
+            position: relative;
+            width: 100%;
+            height: 520px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 35px;
+
+            opacity: 0;
+            transition: 0.6s;
+        }
+
+        /* 顯示中的圖片 */
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* 小圈圈 */
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #d8c8cc;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: #ec9aa7;
+            transform: scale(1.2);
+        }
+
+        
+        .nav-cart {
+
+            margin-left: 30px;
+
+            color: #555;
+
+            font-weight: bold;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.3s;
+        }
+
+        .nav-cart i {
+
+            font-size: 18px;
+
+            color: #ff8faa;
+        }
+
+        .nav-cart:hover {
+
+            color: #ff6b81;
+        }
+
+        .nav-cart:hover i {
+
+            color: #ff6b81;
+        }
     </style>
 </head>
 
@@ -559,12 +639,17 @@
         <div class="logo">
             🐾 喵咪服務處
         </div>
+        <div class="cart-sidebar" id="cartSidebar"></div>
 
         <nav>
             <a href="./index.html">首頁</a>
             <a href="./us.html">關於我們</a>
             <a href="./meow.html">貓咪專區</a>
             <a href="./member.html">會員登入</a>
+             <a href="#" class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                購物車
+            </a>
         </nav>
 
     </header>
@@ -574,6 +659,7 @@
     <section class="hero">
 
         <div class="hero-text">
+            <div class="slider"></div>
 
             <h1>給貓咪最好的生活 </h1>
 
@@ -585,22 +671,39 @@
 
             <div class="hero-btns">
 
-                <a href="http://127.0.0.1:5500/meow.html" class="btn btn-main">
+                <a href="./meow.html" class="btn btn-main">
                     立即選購
                 </a>
 
-                <a href="http://127.0.0.1:5500/us.html" class="btn btn-sub">
+                <a href="./us.html" class="btn btn-sub">
                     了解更多
                 </a>
 
             </div>
 
         </div>
+        <div class="slides">
 
-        <div class="hero-img">
-            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1200">
+            <img src="./photo/cat-4.jpg" class="slide active">
+
+            <img src="./photo/cat-5.jpg" class="slide">
+
+            <img src="./photo/cat-6.jpg" class="slide">
+
         </div>
 
+        <!-- 小圈圈 -->
+        <div class="dots">
+
+            <span class="dot active"></span>
+
+            <span class="dot"></span>
+
+            <span class="dot"></span>
+
+        </div>
+
+        </div>
     </section>
 
     <!-- 特色 -->
@@ -632,18 +735,13 @@
             </div>
 
             <div class="feature-card">
-
                 <img src="https://cdn-icons-png.flaticon.com/512/2138/2138440.png">
-
                 <h3>愛心捐助</h3>
-
                 <p>
                     每月固定捐贈飼料與營收，
                     幫助更多流浪毛孩找到溫暖的家。
                 </p>
-
             </div>
-
             <div class="feature-card">
 
                 <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png">
@@ -679,192 +777,153 @@
             <div class="card">
 
                 <img src="https://images.unsplash.com/photo-1545249390-6bdfa286032f?q=80&w=1000">
-
                 <div class="card-content">
-
                     <h3>天然貓糧</h3>
-
                     <p>
                         高蛋白低負擔，
                         提供貓咪健康營養。
                     </p>
-
                 </div>
-
             </div>
-
             <div class="card">
-
                 <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?q=80&w=1000">
-
                 <div class="card-content">
-
                     <h3>貓咪玩具</h3>
-
                     <p>
                         增加互動與運動量，
                         讓毛孩每天都開心。
                     </p>
-
                 </div>
-
             </div>
-
             <div class="card">
-
                 <img src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1000">
-
                 <div class="card-content">
-
                     <h3>舒適貓砂</h3>
-
                     <p>
                         強力除臭與凝結效果，
                         打造乾淨生活空間。
                     </p>
-
                 </div>
-
             </div>
-
             <div class="card">
-
                 <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=1000">
-
                 <div class="card-content">
 
                     <h3>健康零食</h3>
-
                     <p>
                         天然凍乾零食，
                         兼顧美味與營養。
                     </p>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
-
     <!-- 愛心區 -->
-
     <section class="donate">
-
         <div class="donate-box">
-
-            <div class="donate-text">
+           <div class="donate-text">
 
                 <h2>一起守護浪浪 🐾</h2>
-
                 <p>
                     喵咪服務處除了提供高品質商品，
                     也長期支持流浪動物照護。
                     每個月固定捐贈飼料與營收，
                     希望讓更多毛孩擁有幸福生活。
                 </p>
-
             </div>
-
             <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1200">
-
         </div>
-
     </section>
-
     <!-- 底線 -->
-
     <br>
     <div class="divider"></div>
-
     <!-- Footer -->
     <footer class="footer">
-
         <div class="footer-container">
-
             <!-- 左邊 -->
             <div class="footer-box">
-
                 <h2>聯絡我們</h2>
                 <hr>
-
                 <div class="info-line">
                     <img src="./photo/phone.png" class="icon">
                     <span>電話：0423261718</span>
                 </div>
-
                 <div class="info-line">
                     <img src="./photo/map.png" class="icon">
                     <span>地址：408臺中市南屯區大業里公益路二段42號</span>
                 </div>
-
                 <div class="info-line">
                     <img src="./photo/clock.jpg" class="icon">
                     <span>營業時間：09:00 - 17:30</span>
                 </div>
-
             </div>
-
             <!-- 右邊 -->
             <div class="footer-box">
-
                 <h2>社群媒體</h2>
                 <hr>
-
                 <div class="info-line">
                     <img src="./photo/fb.jpg" class="icon">
                     <a href="https://www.facebook.com/Tripodking/?locale=zh_TW">
                         喵咪服務處facebook
                     </a>
                 </div>
-
                 <div class="info-line">
                     <img src="./photo/ig.png" class="icon">
                     <a href="https://www.instagram.com/tripodking_tw/">
                         喵咪服務處instagram
                     </a>
                 </div>
-
                 <div class="info-line">
                     <img src="./photo/thread.png" class="icon">
                     <a href="https://www.threads.com/@tripodking_tw">
                         喵咪服務處Threads
                     </a>
                 </div>
-
             </div>
-
         </div>
     </footer>
-
-
     <!-- TOP -->
-
     <a href="#top" class="top-btn">
-        🐾 TOP
-    </a>
-
+        🐾 TOP</a>
     <script>
-
         const topBtn = document.querySelector(".top-btn");
-
-        window.addEventListener("scroll", () => {
-
-            if (window.scrollY > 200) {
-
-                topBtn.classList.add("show");
-
-            } else {
-
-                topBtn.classList.remove("show");
-
-            }
-
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        let current = 0;
+        /* 顯示圖片 */
+        function showSlide(index) {
+            slides.forEach(slide => {
+                slide.classList.remove("active");
+            });
+            dots.forEach(dot => {
+                dot.classList.remove("active");
+            });
+            slides[index].classList.add("active");
+            dots[index].classList.add("active");
+            current = index;
+        }
+        /* 點小圈圈切換 */
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                showSlide(index);
+            });
         });
-
+        /* 自動播放 */
+        setInterval(() => {
+            current++;
+            if (current >= slides.length) {
+                current = 0;
+            }
+            showSlide(current);
+        }, 3000);
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                topBtn.classList.add("show");
+            } else {
+                topBtn.classList.remove("show");
+            }
+        });
     </script>
-
+    <script src="./js/cart.js"></script>
 </body>
-
 </html>

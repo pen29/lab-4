@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="tw">
+<head>
+  <meta charset="UTF-8">
+  <title>喵咪服務處</title>
+  <link rel="icon" type="image/png" href="./photo/800x.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft JhengHei", sans-serif;
+    }
+    .login-card {
+      width: 430px;
+      padding: 50px 40px;
+      border-radius: 38px;
+      background:
+        rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      position: relative;
+      z-index: 10;
+      animation: floatCard 4s ease-in-out infinite;
+    }
+    .log {
+      width: 95px;
+      height: 95px;
+      margin: auto;
+      border-radius: 50%;
+      background:
+        linear-gradient(135deg, #ffb3c7, #f48fa8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 36px;
+      box-shadow:
+        0 10px 25px rgba(244, 143, 168, 0.45);
+    }
+    .title {
+      text-align: center;
+      margin-top: 25px;
+    }
+    .title h1 {
+      font-size: 52px;
+      color: #1f2c4d;
+    }
+    .title p {
+      margin-top: 12px;
+      color: #777;
+      font-size: 18px;
+    }
+    .form-group {
+      margin-top: 28px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #222;
+    }
+    .input-box {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 20px;
+      padding: 0 18px;
+      border: 2px solid transparent;
+      transition: 0.35s;
+      box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.04);
+    }
+    .input-box:hover {
+      transform: translateY(-2px);
+    }
+    .input-box:focus-within {
+      border-color: #f5a0b3;
+      box-shadow:
+        0 0 0 5px rgba(245, 160, 179, 0.15),
+        0 10px 20px rgba(245, 160, 179, 0.2);
+    }
+    .input-box i {
+      color: #aaa;
+      font-size: 18px;
+    }
+    .input-box input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 18px 15px;
+      font-size: 17px;
+    }
+    .input-box input::placeholder {
+      color: #bbb;
+    }
+    .login-btn {
+      width: 100%;
+      border: none;
+      margin-top: 35px;
+      padding: 18px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, #ffb4c7, #f58ea8);
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.35s;
+      box-shadow:
+        0 12px 25px rgba(245, 142, 168, 0.35);
+    }
+    .login-btn:hover {
+      transform:
+        translateY(-4px) scale(1.01);
+
+      box-shadow:
+        0 18px 35px rgba(245, 142, 168, 0.45);
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 35px 0;
+      color: #888;
+    }
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+    .divider span {
+      padding: 0 15px;
+      font-size: 15px;
+    }
+    a {
+      text-decoration: none;
+      color: darkslategray;
+    }
+    body {
+      background: rgb(240, 226, 233);
+      font-family: sans-serif;
+    }
+    /* 卡片區域 */
+    .product-area {
+      background:
+    linear-gradient(rgba(244,221,225,0.7),
+    rgba(244,221,225,0.7)),
+    url("./photo/boll.jpg");
+  background-repeat: repeat;
+      margin: 0 auto;
+      display: flex;
+      border-radius: 15px;
+      box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
+      width: 1000pt;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 40px;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 10px;
+    }
+    .box {
+      background: white;
+      width: 450px;
+      min-height: 100px;
+      padding: 20px;
+      border-radius: 15px;
+    }
+    /* 平滑滾動 */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* TOP按鈕 */
+    .top-btn {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      background: linear-gradient(45deg, #ff6b81, #ff9a9e);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: transform 0.3s ease,
+        box-shadow 0.3s ease,
+        opacity 0.3s ease;
+    }
+    /* 滑動後出現 */
+    .top-btn.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    /* hover效果 */
+    .top-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    /* 導覽列 */
+    .navbar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 999;
+    }
+    /* Logo */
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      color: #ff6b81;
+    }
+    /* 導覽按鈕 */
+    .navbar nav a {
+      margin-left: 30px;
+      color: #555;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    /* hover */
+    .navbar nav a:hover {
+      color: #ff6b81;
+    }
+    .divider {
+      height: 6px;
+      width: 100%;
+      background:
+        radial-gradient(circle, #c8a96b 2px, transparent 2px);
+      background-size: 14px 6px;
+      background-repeat: repeat-x;
+    }
+    .footer {
+      padding: 70px 8%;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-box {
+      background: white;
+      width: 560px;
+      min-height: 250px;
+      padding: 35px 40px;
+    border-radius: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+    .footer-box h2 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .footer-box hr {
+      margin-bottom: 20px;
+      border: none;
+      border-top: 1px solid #bbb;
+    }
+    .info-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    .footer-box a {
+      color: #555;
+      transition: 0.3s;
+    }
+    .footer-box a:hover {
+      color: #ff6b81;
+    }
+  .nav-cart{
+    margin-left: 30px;
+    color: #555;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+.nav-cart i{
+    font-size: 18px;
+    color: #ff8faa;
+}
+.nav-cart:hover{
+    color: #ff6b81;
+}
+.nav-cart:hover i{
+    color: #ff6b81;
+}
+  </style>
+</head>
+<body id="top">
+  <header class="navbar">
+    <div class="logo">
+      🐾喵咪服務處
+    </div>
+    <nav>
+      <a href="./index.html">首頁</a>
+      <a href="./us.html">關於我們</a>
+      <a href="./meow.html">貓咪專區</a>
+      <a href="./member.html">會員登入</a>
+     <a href="#" class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                購物車</a>
+    </nav>
+  </header>
+  <title>喵咪服務處</title>
+  <h1 style="text-align: center; color: #666;">會員登入</h1><br><br>
+  <div class="product-area">
+    <div class="login-card">
+      <div class="log">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="title">
+        <h1>Member</h1>
+        <p>歡迎回來，請登入您的帳號</p>
+      </div>
+      <!-- 帳號 -->
+      <div class="form-group">
+        <label>帳號</label>
+        <div class="input-box">
+          <i class="fa-regular fa-user"></i>
+          <input type="text" placeholder="請輸入帳號">
+        </div>
+      </div>
+      <!-- 密碼 -->
+      <div class="form-group">
+        <label>密碼</label>
+        <div class="input-box">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" placeholder="請輸入密碼">
+        </div>
+      </div>
+      <!-- LOGIN -->
+      <button class="login-btn">
+        登入
+      </button>
+      <div class="bottom-links">
+        <a href="#">
+          註冊會員
+        </a>
+        <a href="#">
+          忘記密碼？
+        </a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br><br>
+  <div class="divider">
+  </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- 左邊 -->
+      <div class="footer-box">
+        <h2>聯絡我們</h2>
+        <hr>
+        <div class="info-line">
+          <img src="./photo/phone.png" class="icon">
+          <span>電話：0423261718</span>
+        </div>
+        <div class="info-line">
+          <img src="./photo/map.png" class="icon">
+          <span>地址：408臺中市南屯區大業里公益路二段42號</span>
+        </div>
+        <div class="info-line">
+          <img src="./photo/clock.jpg" class="icon">
+          <span>營業時間：09:00 - 17:30</span>
+        </div>
+      </div>
+      <!-- 右邊 -->
+      <div class="footer-box">
+        <h2>社群媒體</h2>
+        <hr>
+        <div class="info-line">
+          <img src="./photo/fb.jpg" class="icon">
+          <a href="https://www.facebook.com/Tripodking/?locale=zh_TW">
+            喵咪服務處facebook</a>
+        </div>
+        <div class="info-line">
+          <img src="./photo/ig.png" class="icon">
+          <a href="https://www.instagram.com/tripodking_tw/">
+            喵咪服務處instagram</a>          
+        </div>
+        <div class="info-line">
+          <img src="./photo/thread.png" class="icon">
+          <a href="https://www.threads.com/@tripodking_tw">
+            喵咪服務處Threads</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a href="#top" class="top-btn">🐾TOP </a>
+  <script>
+    const topBtn = document.querySelector(".top-btn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        topBtn.classList.add("show");
+      } else {
+        topBtn.classList.remove("show");
+      }
+    });
+  </script>
+   <script src="./js/cart.js"></script>
+</body>
+</html>

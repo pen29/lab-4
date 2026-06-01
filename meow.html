@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>喵咪服務處</title>
+    <link rel="icon" type="image/png" href="./photo/800x.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f6eef1;
+            color: #555;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 卡片區域 */
+
+        .product-area {
+            background: rgb(244, 221, 225);
+            margin: 0 auto;
+            display: flex;
+            border-radius: 15px;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.12);
+            width: 1000pt;
+
+            gap: 30px;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            padding: 40px;
+        }
+
+        /* 卡片 */
+
+        .card {
+            position: relative;
+            width: 260px;
+
+            background: #f5f5ed;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+            transition: 0.3s;
+        }
+
+        /* hover 效果 */
+
+        .card:hover {
+            transform: translateY(-10px);
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 圖片 */
+
+        .card img {
+
+            width: 100%;
+
+            height: 280px;
+
+            object-fit: cover;
+        }
+
+        /* 標題 */
+
+        .card h3 {
+            text-align: center;
+
+            color: #5b5b35;
+
+            margin-top: 15px;
+        }
+
+        /* 文字 */
+
+        .card p {
+            padding: 20px;
+
+            line-height: 1.8;
+
+            color: #666;
+
+        }
+
+        .hot-ribbon {
+
+            position: absolute;
+
+            top: 12px;
+            right: -35px;
+
+            background: linear-gradient(45deg, #ff4d4d, #ff8080);
+
+            color: white;
+
+            padding: 6px 50px;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            transform: rotate(45deg);
+
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+
+            text-align: center;
+
+            z-index: 10;
+        }
+
+        .hot-ribbon::before,
+        .hot-ribbon::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            border-top: 3px solid #cc0000;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+        }
+
+        .hot-ribbon::before {
+            left: 0;
+        }
+
+        .hot-ribbon::after {
+            right: 0;
+        }
+
+        .container {
+
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .box {
+            background: white;
+
+            width: 450px;
+
+            min-height: 100px;
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+        }
+
+        /* 平滑滾動 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* TOP按鈕 */
+        .top-btn {
+
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            background: linear-gradient(45deg, #ff6b81, #ff9a9e);
+
+            color: white;
+
+            padding: 12px 16px;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+            font-size: 14px;
+
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(20px);
+
+            transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        /* 滑動後出現 */
+        .top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* hover效果 */
+        .top-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 導覽列 */
+        .navbar {
+
+            position: sticky;
+            top: 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 60px;
+
+            background: rgba(255, 255, 255, 0.7);
+
+            backdrop-filter: blur(10px);
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+            z-index: 999;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff6b81;
+        }
+
+        /* 導覽按鈕 */
+        .navbar nav a {
+
+            margin-left: 30px;
+
+            color: #555;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        /* hover */
+        .navbar nav a:hover {
+            color: #ff6b81;
+        }
+
+        .divider {
+            height: 6px;
+            width: 100%;
+
+            background:
+                radial-gradient(circle, #c8a96b 2px, transparent 2px);
+
+            background-size: 14px 6px;
+            background-repeat: repeat-x;
+        }
+
+        .text-2 {
+            color: #605357;
+        }
+
+        .text-3 {
+            color: #605357;
+        }
+
+        .product-area-2,
+        .product-area-3 {
+            background: rgb(244, 221, 225);
+            ;
+            margin: 0 auto;
+            display: flex;
+            border-radius: 15px;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.12);
+            width: 1000pt;
+
+            gap: 30px;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            padding: 40px;
+        }
+
+        .side-menu {
+
+            position: fixed;
+
+            left: 15px;
+
+            bottom: 25px;
+
+            background: rgba(230, 212, 198, 0.95);
+
+            padding: 25px 18px;
+
+            border-radius: 0 25px 25px 0;
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+            z-index: 999;
+        }
+
+        .section-title {
+
+            font-size: 32px;
+
+            color: #7b5d66;
+
+            margin: 40px 0 15px 80px;
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            position: relative;
+        }
+
+        /* 底線效果 */
+        .section-title::after {
+
+            content: "";
+
+            display: block;
+
+            width: 180px;
+
+            height: 4px;
+
+            background: linear-gradient(to right, #ff9eb5, #ffc7d4);
+
+            border-radius: 50px;
+
+            margin-top: 10px;
+        }
+
+        .side-menu a {
+
+            display: block;
+
+            color: rgb(91, 86, 86);
+
+            margin: 18px 0;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+
+            color: #ffd6de;
+
+            transform: translateX(5px);
+        }
+
+        #food,
+        #snack,
+        #play,
+        #use {
+            scroll-margin-top: 100px;
+        }
+
+        .footer {
+
+            padding: 70px 8%;
+        }
+
+        .footer-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: stretch;
+
+            gap: 40px;
+
+            flex-wrap: wrap;
+        }
+
+        .footer-box {
+
+            background: white;
+
+            width: 560px;
+
+            min-height: 250px;
+
+            padding: 35px 40px;
+
+            border-radius: 25px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .footer-box h2 {
+
+            font-size: 28px;
+
+            color: #333;
+
+            margin-bottom: 15px;
+        }
+
+        .footer-box hr {
+
+            margin-bottom: 20px;
+
+            border: none;
+
+            border-top: 1px solid #bbb;
+        }
+
+        .info-line {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin: 12px 0;
+        }
+
+        .icon {
+
+            width: 28px;
+
+            height: 28px;
+
+            object-fit: contain;
+        }
+
+        .footer-box a {
+
+            color: #555;
+
+            transition: 0.3s;
+        }
+
+        .footer-box a:hover {
+
+            color: #ff6b81;
+        }
+
+        /* ===== Modal ===== */
+
+        .modal {
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.45);
+
+            display: none;
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 9999;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+
+            width: 900px;
+
+            background: #fff4f6;
+
+            border-radius: 25px;
+
+            padding: 35px;
+
+            display: flex;
+
+            gap: 40px;
+
+            position: relative;
+        }
+
+        /* 關閉 */
+
+        .close {
+
+            position: absolute;
+
+            top: 15px;
+            right: 20px;
+
+            font-size: 32px;
+
+            cursor: pointer;
+
+            color: #555;
+        }
+
+        /* 左邊 */
+
+        .modal-left {
+            width: 50%;
+        }
+
+        .modal-left #mainImg {
+
+            width: 100%;
+
+            height: 420px;
+
+            object-fit: cover;
+
+            border-radius: 20px;
+        }
+
+        /* 小圖 */
+
+        .small-imgs {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .small {
+
+            width: 80px;
+            height: 80px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            opacity: 0.7;
+
+            transition: 0.3s;
+        }
+
+        .small:hover,
+        .small.active {
+
+            opacity: 1;
+
+            border: 3px solid #ff8ea1;
+        }
+
+        /* 右邊 */
+
+        .modal-right {
+
+            flex: 1;
+        }
+
+        .modal-right h2 {
+
+            font-size: 40px;
+
+            margin-bottom: 20px;
+
+            color: #444;
+        }
+
+        .price {
+
+            font-size: 28px;
+
+            color: #ff6b81;
+
+            margin-bottom: 30px;
+        }
+
+        /* 尺寸 */
+
+        .sizes {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin: 20px 0;
+        }
+
+        .sizes button {
+
+            width: 70px;
+            height: 45px;
+
+            border: none;
+
+            background: white;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            border: 2px solid #ffd0d8;
+        }
+
+        /* 數量 */
+
+        .quantity {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            width: 220px;
+
+            border: 2px solid #ffd0d8;
+
+            border-radius: 10px;
+
+            padding: 10px 20px;
+
+            margin: 30px 0;
+        }
+
+        .quantity button {
+
+            border: none;
+
+            background: none;
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+        /* 按鈕 */
+
+        .cart-btn {
+
+            width: 100%;
+
+            padding: 18px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #222;
+
+            color: white;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .cart-btn:hover {
+
+            background: #ff6b81;
+        }
+
+        .desc {
+
+            margin-top: 35px;
+
+            line-height: 2;
+
+            color: #666;
+        }
+
+
+        .nav-cart {
+
+            margin-left: 30px;
+
+            color: #555;
+
+            font-weight: bold;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.3s;
+        }
+
+        .nav-cart i {
+
+            font-size: 18px;
+
+            color: #ff8faa;
+        }
+
+        .nav-cart:hover {
+
+            color: #ff6b81;
+        }
+
+        .nav-cart:hover i {
+
+            color: #ff6b81;
+        }
+
+        /* ===== 購物車側邊欄 ===== */
+
+        .cart-sidebar {
+
+            position: fixed;
+
+            top: 0;
+            right: -420px;
+
+            width: 380px;
+
+            height: 100vh;
+
+            background: white;
+
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+
+            z-index: 99999;
+
+            padding: 30px 20px;
+
+            transition: 0.4s;
+
+            overflow-y: auto;
+        }
+
+        /* 打開 */
+
+        .cart-sidebar.show {
+
+            right: 0;
+        }
+
+        /* 標題 */
+
+        .cart-sidebar h2 {
+
+            color: #ff6b81;
+
+            margin-bottom: 25px;
+        }
+
+        /* 空文字 */
+
+        .empty-text {
+
+            color: #999;
+
+            text-align: center;
+
+            margin-top: 50px;
+        }
+
+        /* 商品 */
+
+        .cart-item {
+
+            display: flex;
+
+            gap: 15px;
+
+            background: #fff5f7;
+
+            padding: 12px;
+
+            border-radius: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .cart-item img {
+
+            width: 80px;
+
+            height: 80px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+        }
+
+        .cart-info {
+
+            flex: 1;
+        }
+
+        .cart-info h4 {
+
+            margin-bottom: 8px;
+
+            color: #444;
+        }
+
+        .cart-info p {
+
+            color: #ff6b81;
+
+            font-weight: bold;
+        }
+
+        .cart-close {
+
+            position: absolute;
+
+            top: 15px;
+
+            right: 20px;
+
+            font-size: 32px;
+
+            cursor: pointer;
+
+            color: #555;
+
+            transition: 0.3s;
+        }
+
+        .cart-close:hover {
+
+            color: #ff6b81;
+
+            transform: scale(1.1);
+        }
+
+        .cart-total {
+
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 2px solid #ffd0d8;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #ff6b81;
+
+            text-align: right;
+        }
+    </style>
+
+</head>
+
+<body id="top">
+
+    <div class="side-menu">
+
+        <a href="#food">吃飽區</a>
+
+        <a href="#snack">點心區</a>
+        <a href="#play">玩耍區</a>
+
+        <a href="#use">貓砂區</a>
+
+    </div>
+    <header class="navbar">
+        <div class="logo">
+            🐾喵咪服務處
+        </div>
+        <nav>
+            <a href="./index.html">首頁</a>
+            <a href="./us.html">關於我們</a>
+            <a href="./meow.html">貓咪專區</a>
+            <a href="./member.html">會員登入</a>
+            <a href="#" class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                購物車
+                <span id="cartCount">0</span></a>
+        </nav>
+    </header>
+    <title>喵咪服務處</title>
+    <h1 style="text-align: center; color: #666;">貓咪專區</h1>
+    <h2 id="food" class="section-title">
+        ｜吃飽區｜
+    </h2>
+    <hr>
+    <div class="product-area">
+
+        <div class="card" data-name="WELLNESS" data-price="$1,800"
+            data-desc="商品詳情:
+成分: 去骨雞肉、乾燥雞肉、豌豆、乾燥火雞肉、豌豆蛋白、乾甜菜漿、乾燥芒草、乾馬鈴薯粉、雞肉脂肪、天然香料、亞麻籽、氯化膽鹼、蔓越莓、乾燥菊苣根、牛磺酸、水解酵母、維生素E、氯化鈣、L-肉鹼、乾海帶、L-抗壞血酸-2-多磷酸鹽、菸鹼酸、蛋白鋅、硫酸亞鐵、硫酸鋅、蛋白鐵、絲蘭萃取物、維生素A、硝酸硫胺、d-泛酸鈣、亞硒酸鈉、硫酸銅、鹽酸吡哆醇、硫酸錳、核黃素、蛋白錳、蛋白銅、生物素、維生素D3、維生素B12、葉酸、鈣碘酸鹽、維生素C、腸球菌發酵產物、乾地衣芽孢桿菌發酵產物、乾枯草桿菌發酵產物、迷迭香萃取物、綠茶萃取物、留蘭香萃取物。"
+            data-img="./photo/eat-1.webp">
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/eat-1.webp">
+
+            <h3>WELLNESS</h3>
+
+            <p>
+                全方位有穀貓糧 <br>新鮮雞肉5磅
+
+            </p>
+        </div>
+
+        <div class="card" data-name="ALINA" data-price="$1,150"
+            data-desc="乾燥雞肉、樹薯澱粉、乾燥鯡魚粉、雞油脂、豌豆、乾燥苜蓿、甜菜、水解蛋白、豌豆蛋白、酵母粉、鮭魚油、乾燥雞肝粉、牛磺酸、羽衣甘藍、七種天然藻類、膽鹼、離胺酸、綜合礦物質（鐵、鋅、錳、銅、硒、碘）、綜合維生素（維生素E、菸鹼酸、泛酸鈣、生物素、維生素B2、維生素A、維生素B6、維生素B1、維生素D3、維生素B12、葉酸）、蔓越莓、甘露寡糖、β-葡聚醣、絲蘭、酵母硒。"
+            data-img="./photo/eat-2.webp">
+            <img src="./photo/eat-2.webp">
+
+            <h3>ALINA</h3>
+
+            <p>
+                五星主廚無穀貓飼料 2KG <br>成貓活力食譜｜雞肉+鯡魚
+
+            </p>
+        </div>
+        <div class="card" data-name="毛孩時代" data-price="$850" data-desc="主成分：脫水雞肉（台、澳）、新鮮氣冷雞肉漿、豌豆、番薯、酵母、雞油、魚油（鮭魚油）。"
+            data-img="./photo/eat-3.png">
+
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/eat-3.png">
+
+            <h3>毛孩時代</h3>
+
+            <p>
+                鮮雞肉低磷關節貓糧 <br>
+                7歲以上熟齡貓咪
+
+            </p>
+        </div>
+        <div class="card" data-name="原點" data-price="$1,860" data-desc="成分: 雞肉，雞肉粉，火雞肉粉，油鯡魚粉，豌豆，雞脂肪（以維生素E保存），木薯，天然香料，乾燥番茄碎粒，蒙脫石粘土，紅蘿蔔，蘋果，蔓越莓，氯化膽鹼，鹽，維生素群（維生素E，多磷酸態維生素C，菸鹼酸，維生素A，維生素B1，維生素B5，維生素B2，維生素B6，維生素B12，維生素B9，維生素D3，維生素B7），礦物質（鋅蛋白鹽，鐵蛋白鹽，銅蛋白鹽，錳蛋白鹽，亞硒酸鈉，乙二胺二氫碘酸鹽），凍乾鱈魚，牛磺酸，南瓜籽，乾燥芽孢乳酸菌，迷迭香萃取物
+營養分析: 粗蛋白(最少) 41.0％、粗脂肪(最少) 21.0％、粗纖維(最多) 3.0％、水分(最多) 9.0％、維生素E(最少) 100 IU/kg、維生素C(最少) 85 mg/kg、Omega-3脂肪酸(最少) 0.45％、Omega-6脂肪酸(最少) 3.0％
+熱量(代謝能量) 4300大卡/公斤" data-img="./photo/eat-4.webp">
+            <img src="./photo/eat-4.webp">
+
+            <h3>原點</h3>
+
+            <p>
+                雞肉無穀全貓配方 <br>11磅
+
+            </p>
+        </div>
+        <div class="card" data-name="Petlife全齡貓 營養化毛 1.8公斤" data-price="$599"
+            data-desc="主要原料：
+雞肉粉、糙米粒、米糠、木質纖維、豌豆蛋白、黃金亞麻籽、食品級牛油、燕麥粒、液態水解動物蛋白、發酵糖蜜、大麥粒、礦物質(鉀、鎂)、菊苣纖維、離胺酸，甲硫胺酸，粉態水解動物蛋白，牛磺酸，氯化膽鹼，綜合蔬菜粉 (紅蘿蔔粉、南瓜粉、馬鈴薯粉、番茄粉、甜菜根粉、紫山藥粉、紫地瓜粉)，洋車前籽殼，蒙脫石，有機螯合礦物質(銅、鐵、鋅、錳、碘、硒)，絲蘭萃取物，納豆菌，鳳梨酵素，維生素(A、D、E、B1、B2、B6、B12、泛酸、生物素、葉酸、菸鹼酸)，抗氧化劑，蔓越莓萃取物，木聚醣酵素與葡聚醣酵素，活性乳酸菌粉(亞斯菲德菌Lactobacillus acidophilus LA-5、雷特氏B菌Bifidobacterium lactis BB-12)。"
+            data-img="./photo/eat-5.webp">
+            <img src="./photo/eat-5.webp">
+
+            <h3>Petlife</h3>
+
+            <p>
+                機能優穀糧 <br>全齡貓 營養化毛 1.8公斤
+
+            </p>
+        </div>
+        <div class="card" data-name="法米納" data-price="$1,460" data-desc="主成份：鵪鶉肉(20%)、脫水鵪鶉肉(20%)、豌豆澱粉、鯡魚油、萃取藜麥籽(8%)、亞麻籽、乾燥椰子(2.5%)、薑黃(2.5%)、菊糖、果寡醣、甘露寡醣(萃取自酵母)、洋車前子殼與種子、碳酸鈣、磷酸氫鈣、二水硫酸鈣、氯化鉀、氯化鈉、乾燥啤酒酵母、蘆薈萃取物、葡萄糖胺、硫酸軟骨素。蛋白質來源：鵪鶉肉、脫水鵪鶉肉；碳水化合物來源：豌豆澱粉、萃取藜麥籽。
+" data-img="./photo/eat-6.webp">
+            <img src="./photo/eat-6.webp">
+            <h3>法米納</h3>
+
+            <p>
+                ND藜麥無穀貓 <br>
+                鵪鶉椰子 皮毛1.5公斤
+            </p>
+        </div>
+        <div class="card" data-name="樂倍" data-price="$450"
+            data-desc=" 成分：家禽乾燥肉(台灣番鴨肉、澳洲雞肉)、南極沙丁魚、水解蛋白、天然酵母粉、木薯、椰子仁粉、阿拉斯加鱈魚油、冷壓椰子油、台灣豬脂、黃金亞麻籽、卵磷脂、黑酵母葡聚醣、紅酵母營養液、小胜肽、水解血球蛋白、氯化膽鹼、綜合酵素、絲蘭萃取物、益生纖維、牛磺酸、膠原蛋白(魚)、DL-蛋胺酸、L-離胺酸、胡蘿蔔、地瓜、南瓜、金盞花葉黃素、色胺酸、左旋肉鹼、藍莓、蔓越莓、石榴、枸杞、維生素(A、C、D、E、B1、B2、B6、B12、葉酸、泛酸鈣、菸鹼酸、生物素)、碘、錳、銅、胺基酸鋅、酵母硒、蛋白質鐵、有機錳、有機銅、有機鉻。"
+            data-img="./photo/eat-7.webp">
+            <img src="./photo/eat-7.webp">
+
+            <h3>樂倍</h3>
+
+            <p>
+                黑酵母熟齡貓保健糧 <br>1.3公斤
+
+            </p>
+        </div>
+        <div class="card" data-name="法國皇家" data-price="$1,530" data-desc="成分
+玉米、脫水禽肉蛋白、大麥、玉米粉、小麥、植物分離蛋白*、動物脂肪、玉米懿質、水解動物蛋白、植物纖維、甜菜漿、礦物質、大豆油、酵母菌、魚油、果寡糖、洋車前子殼和籽、水解甲殼素(葡萄糖胺來源)、金盞花萃取物(葉黃素)、水解軟骨(軟骨素來源)
+*LIP:精選高消化性蛋白質
+具有極易吸收的特性" data-img="./photo/eat-8.webp">
+            <img src="./photo/eat-8.webp">
+
+            <h3>法國皇家</h3>
+
+            <p>
+                室內熟齡貓7+歲齡IN+7 <br>3.5公斤
+
+            </p>
+        </div>
+    </div>
+    <br>
+    <br><br>
+    <h2 id="snack" class="section-title">
+        ｜點心區｜
+    </h2>
+    <hr>
+    <div class="product-area-2">
+        <div class="card">
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/eat-9.webp">
+
+            <h3>汪喵星球</h3>
+
+            <p> 無膠純肉泥 雞肉扇貝
+                <br>6克*5入
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/eat-10.webp">
+
+            <h3>寵心出發</h3>
+
+            <p>泥好!南助褐 心血管保健
+                <br>18克*4入
+
+            </p>
+        </div>
+        <div class="card">
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/eat-11.webp">
+
+            <h3>貪貪</h3>
+
+            <p>蜂王胎肉泥條-東海岸鬼頭刀
+                <br> (13克*4入)
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/eat-12.webp">
+
+            <h3>飼糧倉</h3>
+
+            <p> 原肉凍乾 鮮凍大干貝
+                <br>20克
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/eat-13.webp">
+
+            <h3>HYPERR</h3>
+
+            <p>
+                超躍 凍乾零食
+                <br>30克【牛立方】
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/eat-14.webp">
+
+            <h3>好味小姐</h3>
+
+            <p> 貓凍乾
+                <br>40克【鮮蝦全雞】
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/eat-15.webp">
+
+            <h3>貓倍麗</h3>
+
+            <p>珍饌餐盒
+                <br> 57克【上等鮮嫩鮪魚】 (1入)
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/eat-16.webp">
+
+            <h3>Kit Cat</h3>
+
+            <p>【鮪魚+銀魚】
+                <br>80克 (1入)
+
+            </p>
+        </div>
+
+    </div>
+    <h2 id="play" class="section-title">
+        ｜玩耍區｜
+    </h2>
+    <hr>
+    <div class="product-area-3">
+        <div class="card">
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/use-9.webp">
+
+            <h3>卡特喵喵</h3>
+
+            <p> 卡特喵喵貓彎彎(貓抓板)
+                <br>37.5*38*29.5公分
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-10.webp">
+
+            <h3>酷酷貓</h3>
+
+            <p>抓板_摩登躺椅(顏色隨機)
+                <br>67*28*43公分
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-11.webp">
+
+            <h3>喵仙兒</h3>
+
+            <p> 黃麻劍麻盆抓窩(另附木天蓼玩具)
+                <br> (40*40*15公分)
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-12.webp">
+
+            <h3>喵仙兒</h3>
+
+            <p> 貓咪用品系列 奇諾菇菇抓柱
+                <br>(28x34公分)
+
+            </p>
+        </div>
+        <div class="card">
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/use-13.webp">
+
+            <h3>Minus One邁樂思 </h3>
+
+            <p>
+                造型貓草 逗貓棒 雲朵
+                <br>(40*9.5*1.5公分)
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-14.webp">
+
+            <h3>Minus One邁樂思</h3>
+
+            <p>造型貓草 逗貓棒 彩虹
+                <br>(40*9.5*1.5公分)
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-15.webp">
+
+            <h3>Disney </h3>
+
+            <p> 糖霜餅乾貓玩具
+                <br> 3入組
+
+            </p>
+        </div>
+
+        <div class="card">
+            <img src="./photo/use-16.webp">
+
+            <h3>日本FAD</h3>
+
+            <p> 喵喵小魚仔 貓薄荷玩具
+                <br>(3.5*3.5*14公分)
+
+            </p>
+        </div>
+    </div>
+    <h2 id="use" class="section-title">
+        ｜貓砂區｜
+    </h2>
+    <hr>
+    <div class="product-area-3">
+        <div class="card">
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/use-1.webp">
+
+            <h3>怪獸部落</h3>
+
+            <p> 費洛蒙礦砂
+                <br>4公斤
+
+            </p>
+        </div>
+
+        <div class="card">
+            <img src="./photo/use-2.webp">
+
+            <h3>貓艾歐</h3>
+
+            <p>艾歐 DR.ELSEYS 貓砂 無痕紫TRACKS不留痕跡
+                <br>20磅
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-3.webp">
+
+            <h3>藍鑽</h3>
+
+            <p>EVER CLEAN藍鑽 4倍淨味貓砂(藍)(無香)
+                <br> 8.5公斤
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-4.webp">
+
+            <h3>無敵貓砂</h3>
+
+            <p> 無敵貓砂
+                <br>10L
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-5.webp">
+
+            <h3>Jolly Pet</h3>
+
+            <p>
+                凝滯零 高凝結檢測型豆腐砂(奶香)
+                <br>2.5公斤
+
+            </p>
+        </div>
+        <div class="card">
+            <div class="hot-ribbon">HOT</div>
+            <img src="./photo/use-6.webp">
+
+            <h3>毛孩時代</h3>
+
+            <p> 90%纖維絲蘭豆腐砂
+                <br>6L
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-7.webp">
+
+            <h3>艾可</h3>
+
+            <p> 輕質型豆腐貓砂 櫻花
+                <br> 2.8公斤
+
+            </p>
+        </div>
+        <div class="card">
+            <img src="./photo/use-8.webp">
+
+            <h3>超凝小姐</h3>
+
+            <p> 益生菌除臭豆腐砂 珍珠奶茶香
+                <br> 2.7公斤
+
+            </p>
+        </div>
+    </div>
+
+    <br>
+    <div class="divider"> </div>
+
+    <br>
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <!-- 左邊 -->
+            <div class="footer-box">
+
+                <h2>聯絡我們</h2>
+                <hr>
+
+                <div class="info-line">
+                    <img src="./photo/phone.png" class="icon">
+                    <span>電話：0423261718</span>
+                </div>
+
+                <div class="info-line">
+                    <img src="./photo/map.png" class="icon">
+                    <span>地址：408臺中市南屯區大業里公益路二段42號</span>
+                </div>
+
+                <div class="info-line">
+                    <img src="./photo/clock.jpg" class="icon">
+                    <span>營業時間：09:00 - 17:30</span>
+                </div>
+
+            </div>
+
+            <!-- 右邊 -->
+            <div class="footer-box">
+
+                <h2>社群媒體</h2>
+                <hr>
+
+                <div class="info-line">
+                    <img src="./photo/fb.jpg" class="icon">
+                    <a href="https://www.facebook.com/Tripodking/?locale=zh_TW">
+                        喵咪服務處facebook
+                    </a>
+                </div>
+
+                <div class="info-line">
+                    <img src="./photo/ig.png" class="icon">
+                    <a href="https://www.instagram.com/tripodking_tw/">
+                        喵咪服務處instagram
+                    </a>
+                </div>
+
+                <div class="info-line">
+                    <img src="./photo/thread.png" class="icon">
+                    <a href="https://www.threads.com/@tripodking_tw">
+                        喵咪服務處Threads
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+    <div class="cart-sidebar" id="cartSidebar">
+        <span class="cart-close" id="cartClose">&times;</span>
+
+        <h2>
+            🛒 購物車
+        </h2>
+
+        <div id="cartItems">
+
+            <p class="empty-text">
+                尚未加入商品
+            </p>
+
+        </div>
+        <!-- 總金額 -->
+        <div class="cart-total">
+
+            總金額：
+            <span id="totalPrice">$0</span>
+
+        </div>
+
+    </div>
+    <a href="#top" class="top-btn">🐾TOP </a>
+    <div class="modal" id="productModal">
+
+        <div class="modal-box">
+
+            <!-- 關閉 -->
+            <span class="close">&times;</span>
+
+            <!-- 左邊圖片 -->
+            <div class="modal-left">
+
+                <img src="./photo/cat-4.jpg" id="mainImg">
+
+                <div class="small-imgs">
+                </div>
+
+            </div>
+
+            <!-- 右邊內容 -->
+            <div class="modal-right">
+
+                <h2 id="modalTitle">天然貓糧</h2>
+
+                <p class="price" id="modalPrice">$ 899</p>
+
+                <div class="quantity">
+
+                    <button id="minusBtn">-</button>
+
+                    <span id="qty">1</span>
+
+                    <button id="plusBtn">+</button>
+
+                </div>
+
+                <button class="cart-btn">
+                    Add to Cart
+                </button>
+
+                <div class="desc" id="modalDesc">
+
+                    提供高蛋白與完整營養，
+                    讓貓咪健康又有活力。
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="./js/cart.js"></script>
+
+</body>
+
+</html>

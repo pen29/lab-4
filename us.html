@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>喵咪服務處</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="./photo/800x.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f6eef1;
+            color: #555;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* 卡片區域 */
+
+        .product-area {
+            background: rgb(244, 221, 225);
+            margin: 0 auto;
+            display: flex;
+            border-radius: 15px;
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.12);
+            width: 1000pt;
+
+            gap: 30px;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            padding: 40px;
+        }
+        .container {
+
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+        }
+        .box {
+            background: white;
+
+            width: 450px;
+
+            min-height: 100px;
+
+            padding: 20px;
+
+            border-radius: 15px;
+        }
+        /* 平滑滾動 */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* TOP按鈕 */
+        .top-btn {
+
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            background: linear-gradient(45deg, #ff6b81, #ff9a9e);
+
+            color: white;
+
+            padding: 12px 16px;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+            font-size: 14px;
+
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(20px);
+
+            transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        /* 滑動後出現 */
+        .top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* hover效果 */
+        .top-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 導覽列 */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 60px;
+
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff6b81;
+        }
+
+        /* 導覽按鈕 */
+        .navbar nav a {
+
+            margin-left: 30px;
+
+            color: #555;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        /* hover */
+        .navbar nav a:hover {
+            color: #ff6b81;
+        }
+        .divider {
+            height: 6px;
+            width: 100%;
+
+            background:
+                radial-gradient(circle, #c8a96b 2px, transparent 2px);
+
+            background-size: 14px 6px;
+            background-repeat: repeat-x;
+        }
+        .card {
+
+            display: flex;
+
+            align-items: center;
+
+            background: rgb(253, 249, 234);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            min-height: 480px;
+        }
+        /* 左邊圖片 */
+        .card img {
+
+            width: 50%;
+
+            height: 480px;
+
+            object-fit: cover;
+        }
+        /* 右邊文字區 */
+        .card-text {
+
+            width: 50%;
+
+            padding: 50px;
+        }
+        /* 標題 */
+        .card-text h2 {
+
+            font-size: 36px;
+
+            color: #444;
+
+            margin-bottom: 25px;
+        }
+        /* 內文 */
+        .card-text p {
+
+            font-size: 18px;
+
+            color: #666;
+
+            line-height: 2;
+
+            margin-bottom: 20px;
+        }
+
+        .footer {
+
+            padding: 70px 8%;
+        }
+
+        .footer-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: stretch;
+
+            gap: 40px;
+
+            flex-wrap: wrap;
+        }
+
+        .footer-box {
+
+            background: white;
+
+            width: 560px;
+
+            min-height: 250px;
+
+            padding: 35px 40px;
+
+            border-radius: 25px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .footer-box h2 {
+
+            font-size: 28px;
+
+            color: #333;
+
+            margin-bottom: 15px;
+        }
+
+        .footer-box hr {
+
+            margin-bottom: 20px;
+
+            border: none;
+
+            border-top: 1px solid #bbb;
+        }
+
+        .info-line {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin: 12px 0;
+        }
+
+        .icon {
+
+            width: 28px;
+
+            height: 28px;
+
+            object-fit: contain;
+        }
+
+        .footer-box a {
+
+            color: #555;
+
+            transition: 0.3s;
+        }
+
+        .footer-box a:hover {
+
+            color: #ff6b81;
+        }
+
+        .nav-cart {
+
+            margin-left: 30px;
+
+            color: #555;
+
+            font-weight: bold;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.3s;
+        }
+
+        .nav-cart i {
+
+            font-size: 18px;
+
+            color: #ff8faa;
+        }
+
+        .nav-cart:hover {
+
+            color: #ff6b81;
+        }
+
+        .nav-cart:hover i {
+
+            color: #ff6b81;
+        }
+        #cartCount{
+
+    background:#ff6b81;
+
+    color:white;
+
+    border-radius:50%;
+
+    padding:2px 8px;
+
+    font-size:12px;
+
+    margin-left:5px;
+
+    min-width:22px;
+
+    text-align:center;
+}
+    </style>
+</head>
+
+<body id="top">
+    <header class="navbar">
+
+        <div class="logo">
+            🐾喵咪服務處
+        </div>
+        <nav>
+            <a href="./index.html">首頁</a>
+            <a href="./us.html">關於我們</a>
+            <a href="./meow.html">貓咪專區</a>
+            <a href="./member.html">會員登入</a>
+            <a href="#" class="nav-cart">
+    <i class="fa-solid fa-cart-shopping"></i>
+    購物車
+    <span id="cartCount">0</span></a>
+        </nav>
+    </header>
+    <title>喵咪服務處</title>
+    <h1 style="text-align: center; color: #666;">關於我們</h1><br><br>
+    <div class="product-area">
+        <div class="card text">
+            <img src="./photo/cat-1.jpg" alt="暹羅貓">
+            <div class="card-text">
+                <h2>品牌理念</h2>
+                <p>
+                    目前台灣許多家庭都有毛小孩，
+                    大家對於毛小孩的健康也越來越重視，
+                    願意花更多時間研究食品來源與成分安全。
+                </p>
+                <p>
+                    喵咪服務處希望每位主人在購買商品時，
+                    都無須擔心成分是否會造成毛小孩身體負擔，
+                    只需要安心挑選毛小孩喜歡的口味。
+                </p>
+                <p>
+                    我們相信，
+                    吃得開心與吃得安心同樣重要，
+                    希望每一位毛小孩都能健康快樂地陪伴主人生活。
+                </p>
+            </div>
+        </div>
+        <div class="card text">
+
+            <div class="card-text">
+
+                <h2>天然健康</h2>
+
+                <p>
+                    喵咪服務處非常重視毛小孩的飲食健康，
+                    對於食材的新鮮度與品質都有嚴格把關。
+                </p>
+                <p>
+                    不夠新鮮的食材，
+                    在第一階段便會直接被淘汰，
+                    販售的產品也會檢核過成分是否健康，
+                    只為了讓毛小孩吃得更加安心。
+
+                </p>
+                <p>
+                    我們的採購部門也會親自前往農場、牧場與供應商，
+                    深入了解食材的來源與處理過程，
+                    確保每一份食材都維持最佳的新鮮品質。
+                </p>
+                <p>
+                    毛小孩的健康，
+                    就由喵咪服務處為您嚴格把關。
+                </p>
+            </div>
+            <img src="./photo/cat-2.jpg" alt="布偶貓">
+        </div>
+        <div class="card text">
+            <img src="./photo/cat-3.jpg" alt="橘貓">
+            <div class="card-text">
+                <h2>愛心捐款</h2>
+                <p>
+                    喵咪服務處對毛小孩的喜愛與關心，
+                    不僅體現在食材與商品品質上，
+                    也希望能將這份溫暖實際回饋給社會。
+                </p>
+                <p>
+                    我們固定每月提供 5 袋飼料給流浪動物之家，
+                    希望能幫助更多等待被照顧的毛小孩，
+                    讓牠們也能獲得溫暖與關愛。
+                </p>
+                <p>
+                    此外，
+                    喵咪服務處也會將每月營收的 1% 作為愛心捐款，
+                    持續支持流浪動物相關公益與照護行動。
+                </p>
+                <p>
+                    希望透過小小的力量，
+                    為更多毛小孩帶來更好的生活。
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br><br>
+    <div class="divider"></div>
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- 左邊 -->
+            <div class="footer-box">
+                <h2>聯絡我們</h2>
+                <hr>
+                <div class="info-line">
+                    <img src="./photo/phone.png" class="icon">
+                    <span>電話：0423261718</span>
+                </div>
+                <div class="info-line">
+                    <img src="./photo/map.png" class="icon">
+                    <span>地址：408臺中市南屯區大業里公益路二段42號</span>
+                </div>
+                <div class="info-line">
+                    <img src="./photo/clock.jpg" class="icon">
+                    <span>營業時間：09:00 - 17:30</span>
+                </div>
+            </div>
+            <!-- 右邊 -->
+            <div class="footer-box">
+                <h2>社群媒體</h2>
+                <hr>
+                <div class="info-line">
+                    <img src="./photo/fb.jpg" class="icon">
+                    <a href="https://www.facebook.com/Tripodking/?locale=zh_TW">
+                        喵咪服務處facebook
+                    </a>
+                </div>
+                <div class="info-line">
+                    <img src="./photo/ig.png" class="icon">
+                    <a href="https://www.instagram.com/tripodking_tw/">
+                        喵咪服務處instagram
+                    </a>
+                </div>
+                <div class="info-line">
+                    <img src="./photo/thread.png" class="icon">
+                    <a href="https://www.threads.com/@tripodking_tw">
+                        喵咪服務處Threads
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#top" class="top-btn">🐾TOP </a>   
+    <script>
+        const topBtn = document.querySelector(".top-btn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                topBtn.classList.add("show");
+            } else {
+                topBtn.classList.remove("show");
+            }
+        });
+    </script>
+    <script src="./js/cart.js"></script>
+
+</body>
+
+</html>
